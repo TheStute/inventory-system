@@ -17,9 +17,9 @@
         {% endif %}
         <form method="POST" action="/{{thing._id}}">
             <input type="hidden" name="_method" value="PATCH" >
-            <input type="text" name="name" value="{{thing.name}}" placeholder="name">
-            <input type="text" name="location" value="{{thing.location}}" placeholder="location" >
-            <input type="text" name="notes" value="{{thing.notes}}" placeholder="notes" >
+            <input class="form-control" type="text" name="name" value="{{thing.name}}" placeholder="name">
+            <input class="form-control" type="text" name="location" value="{{thing.location}}" placeholder="location" >
+            <input class="form-control" type="text" name="notes" value="{{thing.notes}}" placeholder="notes" >
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
         <form method="POST" action="/{{thing._id}}">
