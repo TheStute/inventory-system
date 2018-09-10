@@ -1,3 +1,6 @@
 pymongo
 flask
 dnspython
+pdfkit
+PyQRCode
+pypng
