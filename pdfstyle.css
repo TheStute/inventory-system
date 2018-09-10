@@ -1,0 +1,16 @@
+.label {
+    margin: none;
+    margin-bottom: -1px;
+    margin-right: 3px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    width: 2.625in;
+    height: 1in;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.label img{
+    float: left;
+    height: 1in;
+}
