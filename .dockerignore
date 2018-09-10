@@ -1,0 +1,9 @@
+**
+
+!/requirements.txt
+!/main.py
+!/static/**
+!/templates/**
+!/pdfgen.py
+!/pdfstyle.css
+!/secrets.json
