@@ -8,14 +8,6 @@
     </head>
     <body>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <div id="new-item">
-            <form method="POST" action="/">
-                <input class="form-control" type="text" name="name" placeholder="name">
-                <input class="form-control" type="text" name="location" placeholder="location">
-                <input class="form-control" type="text" name="notes" placeholder="notes">
-                <button type="submit" class="btn btn-primary">Create</button>
-            </form>
-        </div>
         {% if state=="new" %}
         <div class="alert alert-success" role="alert" >
             Successfully created {{itemId}}
@@ -24,13 +16,35 @@
         <div class="alert alert-success" role="alert">
             Successfully deleted {{itemId}}
         </div>
+        {% elif state=="failed" %}
+        <div class="alert alert-danger" role="alert">
+            Error: {{itemId}}
+        </div>
         {% endif %}
         <input type="text" class="filter form-control" placeholder="Filter">
+        <br>
+        <div id="new-item">
+            <form method="POST" action="/">
+                <input class="form-control" type="text" name="name" placeholder="name">
+                <select class="form-control" name="location">
+                    {% for id,name in locations.items() %}
+                    <option value="{{id}}">{{name}}</option>
+                    {% endfor %}
+                </select>
+                <input class="form-control" type="text" name="notes" placeholder="notes">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+        <div class="card">
+            <h5>Navigation</h5>
+            <a href="/scan" class="btn btn-primary" role="button" >Scanner</a>
+            <a href="/generate" class="btn btn-primary" role="button" >PDF Generator</a>
+        </div>
         <div class="searchable">
             {% for thing in things %}
             <div class="card searchitem">
                 <h5 class="card-title">{{thing.name}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{thing.location}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{locations.get(thing.location, "Other")}}</h6>
                 <p class="card-text">{{thing.notes}}</p>
                 <a href="/{{thing._id}}" class="card-link btn btn-primary">View {{thing.name}}</a>
                 <form method="POST" action="/{{thing._id}}" >
@@ -45,7 +59,6 @@
 			      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			      crossorigin="anonymous"></script>
         <script type="text/javascript">
-         console.log("Hello");
          $('input.filter').on('keyup', function () {
              // Construct array of search text
              var searchtext = $(this).val().replace(/^\s*|\s*$/g,'').split(/\s*,\s*/),

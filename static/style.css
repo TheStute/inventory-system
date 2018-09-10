@@ -1,9 +1,18 @@
+body {
+    align-content: center;
+    text-align: center;
+}
+
 #new-item {
     width: 16rem;
     border: 1px solid lightgray;
     padding: 3px;
     border-radius: 4px;
     display: inline-block;
+}
+
+#new-item form {
+    display: inline;
 }
 
 .filter {
@@ -17,18 +26,4 @@
     display: inline-block;
     align-content: center;
     text-align: center;
-}
-
-@media only screen and (min-width: 32rem){
-    #new-item {
-        height: 100vh;
-        float: left;
-    }
-}
-
-@media only screen and (max-width: 32rem){
-    body {
-        align-content: center;
-        text-align: center;
-    }
 }

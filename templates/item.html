@@ -6,6 +6,7 @@
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     </head>
     <body>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% if state=="updated" %}
         <div class="alert alert-success" role="alert">
             Successfully updated {{thing.name}}
@@ -18,7 +19,15 @@
         <form method="POST" action="/{{thing._id}}">
             <input type="hidden" name="_method" value="PATCH" >
             <input class="form-control" type="text" name="name" value="{{thing.name}}" placeholder="name">
-            <input class="form-control" type="text" name="location" value="{{thing.location}}" placeholder="location" >
+            <select class="form-control" name="location">
+                {% for id,name in locations.items() %}
+                <option value="{{id}}"
+                        {%if ''~id == ''~thing.location%}selected="selected"{%endif%}
+                >
+                    {{name}}
+                </option>
+                {% endfor %}
+            </select>
             <input class="form-control" type="text" name="notes" value="{{thing.notes}}" placeholder="notes" >
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
@@ -27,5 +36,6 @@
             <button type="submit" class="btn btn-primary" >Delete {{thing.name}}</button>
         </form>
         <a href="/" class="btn btn-primary" role="button" >Go Home</a>
+        <a href="/scan" class="btn btn-primary" role="button" >Scanner</a>
     </body>
 </html>

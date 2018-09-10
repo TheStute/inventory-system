@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Stute Inventory Label Generator</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <form method="POST" action="">
+            <div id="items" >
+            {% for thing in things %}
+            <input id="{{thing._id}}" type="checkbox" name="items" value="{{thing._id}}">
+            <label for="{{thing._id}}">{{thing.name}}</label><br>
+            {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Generate labels</button>
+        </form>
+    </body>
+</html>
