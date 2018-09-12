@@ -6,8 +6,6 @@ from time import sleep
 import pdfkit
 import pyqrcode
 
-pdfconfig = pdfkit.configuration(wkhtmltopdf='xvfb-run wkhtmltopdf')
-
 def pdf_cleaner(pdfpath):
     sleep(600)
     os.remove(pdfpath)
@@ -37,7 +35,7 @@ def PDFGen(items):
         'margin-left': '0.5in',
         'margin-right': '0.5in'
     }
-    pdfkit.from_string(theString, 'static/pdfs/'+id+'.pdf', css='pdfstyle.css', options=pdfOptions, configuration=pdfconfig)
+    pdfkit.from_string(theString, 'static/pdfs/'+id+'.pdf', css='pdfstyle.css', options=pdfOptions)
     for item in items:
         itemid = str(item.get('_id'))
         os.remove(id+itemid+'.png')
