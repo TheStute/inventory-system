@@ -1,6 +1,6 @@
 pymongo
 flask
 dnspython
-pdfkit
+headless-pdfkit
 PyQRCode
 pypng

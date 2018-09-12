@@ -3,11 +3,11 @@ from uuid import uuid4 as uuid
 from threading import Thread
 from time import sleep
 
-import pdfkit
+import headless_pdfkit
 import pyqrcode
 
-def pdf_cleaner(pdfpath):
-    sleep(600)
+def pdf_cleaner(pdfpath, sleepT=600):
+    sleep(sleepT)
     os.remove(pdfpath)
 
 def PDFGen(items):
@@ -33,11 +33,15 @@ def PDFGen(items):
         'margin-top': '0.5in',
         'margin-bottom': '0.5in',
         'margin-left': '0.5in',
-        'margin-right': '0.5in'
+        'margin-right': '0.5in',
+        'user-style-sheet': 'pdfstyle.css'
     }
-    pdfkit.from_string(theString, 'static/pdfs/'+id+'.pdf', css='pdfstyle.css', options=pdfOptions)
+    pdf_target = 'static/pdfs/'+id+'.pdf'
+    genned_pdf = headless_pdfkit.generate_pdf(theString, options=pdfOptions)
+    with open(pdf_target, 'w+b') as f:
+        f.write(genned_pdf)
     for item in items:
         itemid = str(item.get('_id'))
-        os.remove(id+itemid+'.png')
-    Thread(target=pdf_cleaner, args=('static/pdfs/'+id+'.pdf',)).start()
-    return '/static/pdfs/'+id+'.pdf'
+        Thread(target=pdf_cleaner, args=(id+itemid+'.png',10)).start()
+    Thread(target=pdf_cleaner, args=(pdf_target,)).start()
+    return pdf_target
