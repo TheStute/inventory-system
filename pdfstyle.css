@@ -8,9 +8,10 @@
     height: 1in;
     display: inline-block;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .label img{
     float: left;
-    height: 1in;
+    height: 100%;
 }

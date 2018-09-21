@@ -13,9 +13,11 @@ def pdf_cleaner(pdfpath, sleepT=600):
 def PDFGen(items):
     id = str(uuid())
     theString = '''
+    <html>
     <head>
     <base href={}>
     </head>
+    <body>
     '''.format(os.getcwd()+'/')
     for item in items:
         itemid = str(item.get('_id'))
@@ -23,11 +25,12 @@ def PDFGen(items):
         url.png(id+itemid+'.png', scale=8)
         theString = theString + '''
         <div class=label>
-        <img src="{id}{itemid}.png">
+        <img src="/app/{id}{itemid}.png">
         <h3>{name}</h3>
         <h6>Property of The Stute</h6>
         </div>
         '''.format(id=id, itemid=itemid, name=item.get('name'))
+    theString = theString + '''</body></html>'''
     pdfOptions = {
         'page-size': 'Letter',
         'margin-top': '0.5in',
